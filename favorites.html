@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieFinder - Favorites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page home-page">
+    <div class="card home-card">
+
+      <div class="top-bar">
+        <h2 class="brand">MovieFinder</h2>
+        <div class="nav-buttons">
+          <a href="index.html" class="small-btn">Home</a>
+          <a href="favorites.html" class="small-btn active-btn">Favorites</a>
+          <button onclick="logout()" class="small-btn">Logout</button>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1>My Favorites</h1>
+        <p>Your saved movies and streaming links</p>
+        <p id="welcomeUser" style="margin-top:10px; font-weight:bold;"></p>
+      </div>
+
+      <div id="favoritesContainer"></div>
+
+    </div>
+  </div>
+
+<script>
+const API_BASE = "http://192.168.56.104:3000";
+
+const email = localStorage.getItem("loggedInUser");
+const mfaVerified = localStorage.getItem("mfaVerified");
+const welcomeUser = document.getElementById("welcomeUser");
+
+if (!email) {
+  alert("Please login first");
+  window.location.href = "login.html";
+} else if (mfaVerified !== "true") {
+  window.location.href = "mfa.html";
+} else {
+  welcomeUser.textContent = "Logged in as: " + email;
+}
+
+async function loadFavorites() {
+  const response = await fetch(`${API_BASE}/favorites/${email}`);
+  const favorites = await response.json();
+
+  const container = document.getElementById("favoritesContainer");
+
+  if (favorites.length === 0) {
+    container.innerHTML = "<p style='text-align:center;'>No favorites saved yet.</p>";
+    return;
+  }
+
+  container.innerHTML = "";
+
+  favorites.forEach(movie => {
+    const card = document.createElement("div");
+    card.className = "movie-card";
+
+    card.innerHTML = `
+      <img src="${movie.poster_url}" alt="Movie poster" class="movie-poster">
+
+      <h3>${movie.movie_title}</h3>
+      <p>Year: ${movie.movie_year}</p>
+
+      <button class="provider-btn" onclick="openProvider('${movie.provider_url}')">
+        Watch on ${movie.provider_name}
+      </button>
+
+      <button class="save-btn" onclick="removeFavorite(${movie.id})">
+        Remove Favorite
+      </button>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function openProvider(url) {
+  window.open(url, "_blank");
+}
+
+async function removeFavorite(id) {
+  await fetch(`${API_BASE}/favorites/${id}`, {
+    method: "DELETE"
+  });
+
+  alert("Favorite removed");
+  loadFavorites();
+}
+
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("mfaVerified");
+  alert("Logged out successfully");
+  window.location.href = "login.html";
+}
+
+loadFavorites();
+</script>
+
+</body>
+</html>

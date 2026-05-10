@@ -14,6 +14,7 @@
         <h2 class="brand">MovieFinder</h2>
         <div class="nav-buttons">
           <a href="index.html" class="small-btn active-btn">Home</a>
+          <a href="favorites.html" class="small-btn">Favorites</a>
           <a href="login.html" class="small-btn">Login</a>
           <a href="register.html" class="small-btn">Register</a>
           <button id="logoutBtn" class="small-btn" style="display:none;">Logout</button>
@@ -22,7 +23,7 @@
 
       <div class="hero">
         <h1>MovieFinder</h1>
-        <p>Search movies, save favorites</p>
+        <p>Search movies, view streaming providers, and save favorites</p>
         <p id="welcomeUser" style="margin-top:10px; font-weight:bold;"></p>
       </div>
 
@@ -33,42 +34,137 @@
 
       <p id="searchMessage" style="margin-top:15px; text-align:center;"></p>
 
+      <div id="resultsContainer" class="results-container"></div>
+
     </div>
   </div>
 
   <script>
+    const API_BASE = "http://192.168.56.104:3000";
+
     const user = localStorage.getItem("loggedInUser");
+    const mfaVerified = localStorage.getItem("mfaVerified");
+
     const welcomeUser = document.getElementById("welcomeUser");
     const logoutBtn = document.getElementById("logoutBtn");
     const searchBtn = document.getElementById("searchBtn");
     const searchInput = document.getElementById("movieSearch");
     const searchMessage = document.getElementById("searchMessage");
+    const resultsContainer = document.getElementById("resultsContainer");
 
-    // Protect home page
     if (!user) {
       window.location.href = "login.html";
+    } else if (mfaVerified !== "true") {
+      window.location.href = "mfa.html";
     } else {
       welcomeUser.textContent = "Logged in as: " + user;
       logoutBtn.style.display = "inline-block";
     }
 
-    // Logout
     logoutBtn.addEventListener("click", function () {
       localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("mfaVerified");
       alert("Logged out successfully");
       window.location.href = "login.html";
     });
 
-    // Placeholder search for demo
-    searchBtn.addEventListener("click", function () {
+    searchBtn.addEventListener("click", searchMovies);
+
+    searchInput.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        searchMovies();
+      }
+    });
+
+    async function searchMovies() {
       const query = searchInput.value.trim();
 
       if (query === "") {
         searchMessage.textContent = "Please enter a movie name.";
-      } else {
-        searchMessage.textContent = 'Search ready for: "' + query + '"';
+        resultsContainer.innerHTML = "";
+        return;
       }
-    });
+
+      searchMessage.textContent = "Searching for: " + query;
+      resultsContainer.innerHTML = "";
+
+      try {
+        const response = await fetch(`${API_BASE}/search?q=${encodeURIComponent(query)}`);
+        const movies = await response.json();
+
+        if (!movies || movies.length === 0) {
+          searchMessage.textContent = 'No movies found for: "' + query + '"';
+          resultsContainer.innerHTML = "";
+          return;
+        }
+
+        searchMessage.textContent = "Search results for: " + query;
+        resultsContainer.innerHTML = "";
+
+        movies.forEach(movie => {
+          const card = document.createElement("div");
+          card.className = "movie-card";
+
+          card.innerHTML = `
+            <img src="${movie.poster_url}" alt="${movie.title} poster" class="movie-poster">
+            <h3>${movie.title}</h3>
+            <p>Year: ${movie.year}</p>
+
+            <button class="provider-btn" onclick='openProvider(${JSON.stringify(movie)})'>
+              Watch on ${movie.provider_name}
+            </button>
+
+            <button class="save-btn" onclick='saveFavorite(${JSON.stringify(movie)})'>
+              Save to Favorites
+            </button>
+          `;
+
+          resultsContainer.appendChild(card);
+        });
+
+      } catch (error) {
+        searchMessage.textContent = "Error loading movies. Check backend server.";
+        console.log(error);
+      }
+    }
+
+    async function saveFavorite(movie) {
+      const favoriteData = {
+        user_email: user,
+        movie_title: movie.title,
+        movie_year: movie.year,
+        poster_url: movie.poster_url,
+        provider_name: movie.provider_name,
+        provider_url: movie.provider_url
+      };
+
+      const response = await fetch(`${API_BASE}/favorites`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(favoriteData)
+      });
+
+      const result = await response.text();
+      alert(result);
+    }
+
+    async function openProvider(movie) {
+      await fetch(`${API_BASE}/provider-click`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          user_email: user,
+          movie_title: movie.title,
+          provider_name: movie.provider_name
+        })
+      });
+
+      window.open(movie.provider_url, "_blank");
+    }
   </script>
 </body>
 </html>
