@@ -1,0 +1,56 @@
+[2026-05-08T04:27:31.798Z] [2026-05-08T04:27:30.973Z] Server running on port 3000
+[2026-05-08T04:27:31.811Z] [2026-05-08T04:27:31.123Z] Connected to database
+[2026-05-08T04:27:44.452Z] [2026-05-08T04:27:43.795Z] Movie search requested: cheeseman
+[2026-05-08T04:27:48.312Z] [2026-05-08T04:27:47.655Z] Favorite add requested by human@dude.man: cheeseman
+[2026-05-08T04:27:48.333Z] [2026-05-08T04:27:47.685Z] Favorite saved for human@dude.man: cheeseman
+[2026-05-08T04:27:55.720Z] [2026-05-08T04:27:55.067Z] Favorites requested for: human@dude.man
+[2026-05-08T04:27:58.369Z] [2026-05-08T04:27:57.716Z] Favorites requested for: human@dude.man
+[2026-05-08T04:28:29.609Z] [2026-05-08T04:28:28.926Z] Login attempt received for email: cheese@man.com
+[2026-05-08T04:28:29.672Z] [2026-05-08T04:28:29.025Z] Login successful for: cheese@man.com
+[2026-05-08T04:29:29.406Z] [2026-05-08T04:29:28.753Z] Movie search requested: we
+[2026-05-08T04:29:31.636Z] [2026-05-08T04:29:30.986Z] Provider clicked by cheese@man.com: Netflix for we
+[2026-05-08T19:48:30.258Z] [2026-05-08T19:48:29.016Z] Server running on port 3000
+[2026-05-08T19:48:30.317Z] [2026-05-08T19:48:29.211Z] Connected to database
+[2026-05-08T19:48:52.300Z] [2026-05-08T19:48:51.262Z] Register attempt received for email: wa@wa.wa
+[2026-05-08T19:48:52.567Z] [2026-05-08T19:48:51.538Z] User registered successfully: wa@wa.wa
+[2026-05-08T19:49:00.366Z] [2026-05-08T19:48:59.339Z] Login attempt received for email: wa@wa.wa
+[2026-05-08T19:49:00.517Z] [2026-05-08T19:48:59.492Z] Login successful for: wa@wa.wa
+[2026-05-08T19:49:03.500Z] [2026-05-08T19:49:02.495Z] Favorites requested for: wa@wa.wa
+[2026-05-08T20:41:23.414Z] [2026-05-08T20:41:22.928Z] Server running on port 3000
+[2026-05-08T20:41:23.442Z] [2026-05-08T20:41:23.034Z] Connected to database
+[2026-05-08T20:42:27.265Z] [2026-05-08T20:42:26.867Z] Movie search requested: batman
+[2026-05-08T20:42:40.602Z] [2026-05-08T20:42:40.217Z] Movie search requested: batmans
+[2026-05-08T20:42:47.520Z] [2026-05-08T20:42:47.152Z] Movie search requested: batman
+[2026-05-09T03:32:26.059Z] [2026-05-09T03:32:24.651Z] Server running on port 3000
+[2026-05-09T03:32:26.073Z] [2026-05-09T03:32:24.766Z] Connected to database
+[2026-05-09T03:33:34.518Z] [2026-05-09T03:33:33.313Z] Movie search requested: undefined
+[2026-05-09T03:33:39.732Z] [2026-05-09T03:33:38.569Z] Movie search requested: undefined
+[2026-05-09T03:33:43.164Z] [2026-05-09T03:33:42.011Z] Movie search requested: undefined
+[2026-05-09T03:33:44.065Z] [2026-05-09T03:33:42.924Z] Movie search requested: undefined
+[2026-05-09T03:33:47.614Z] [2026-05-09T03:33:46.469Z] Movie search requested: undefined
+[2026-05-09T03:33:51.764Z] [2026-05-09T03:33:50.611Z] Movie search requested: undefined
+[2026-05-09T03:33:53.577Z] [2026-05-09T03:33:52.445Z] Movie search requested: undefined
+[2026-05-09T03:33:54.228Z] [2026-05-09T03:33:53.093Z] Movie search requested: undefined
+[2026-05-09T03:33:54.700Z] [2026-05-09T03:33:53.559Z] Movie search requested: undefined
+[2026-05-09T03:34:15.284Z] [2026-05-09T03:34:14.169Z] Movie search requested: undefined
+[2026-05-09T03:36:55.406Z] [2026-05-09T03:36:54.343Z] Server running on port 3000
+[2026-05-09T03:36:55.410Z] [2026-05-09T03:36:54.459Z] Connected to database
+[2026-05-09T03:37:31.335Z] [2026-05-09T03:37:30.394Z] Movie search requested: the office
+[2026-05-09T03:37:44.333Z] [2026-05-09T03:37:43.427Z] Movie search requested: batman
+[2026-05-09T03:37:49.557Z] [2026-05-09T03:37:48.633Z] Movie search requested: bat man
+[2026-05-09T03:37:57.620Z] [2026-05-09T03:37:56.724Z] Movie search requested: avatar
+[2026-05-09T20:38:03.375Z] [2026-05-09T20:38:03.176Z] Server running on port 3000
+[2026-05-09T20:38:03.386Z] [2026-05-09T20:38:03.302Z] Connected to database
+[2026-05-09T20:38:33.960Z] [2026-05-09T20:38:33.901Z] Login attempt received for email: cheese@man.com
+[2026-05-09T20:38:34.765Z] [2026-05-09T20:38:34.729Z] Login successful for: cheese@man.com
+[2026-05-09T20:43:02.698Z] [2026-05-09T20:43:02.896Z] Login attempt received for email: cheese@man.com
+[2026-05-09T20:43:02.856Z] [2026-05-09T20:43:03.038Z] Login successful for: cheese@man.com
+[2026-05-09T20:54:10.182Z] [2026-05-09T20:54:11.075Z] Login attempt received for email: cheese@man.com
+[2026-05-09T20:54:10.351Z] [2026-05-09T20:54:11.235Z] Login successful for: cheese@man.com
+[2026-05-09T20:54:24.727Z] [2026-05-09T20:54:25.629Z] Login attempt received for email: cheese@man.com
+[2026-05-09T20:54:24.871Z] [2026-05-09T20:54:25.774Z] Login successful for: cheese@man.com
+[2026-05-09T20:54:50.058Z] [2026-05-09T20:54:50.987Z] Login attempt received for email: cheese@man.com
+[2026-05-09T20:54:50.194Z] [2026-05-09T20:54:51.123Z] Login successful for: cheese@man.com
+[2026-05-09T20:55:33.822Z] [2026-05-09T20:55:34.798Z] Login attempt received for email: cheese@man.com
+[2026-05-09T20:55:33.946Z] [2026-05-09T20:55:34.923Z] Login successful for: cheese@man.com
+[2026-05-09T20:55:41.610Z] [2026-05-09T20:55:42.593Z] Movie search requested: avatar
